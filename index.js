@@ -5,6 +5,9 @@ const exphbs  = require('express-handlebars');
 //import body-parser
 const bodyParser = require('body-parser');
 
+
+
+
 const SettingsBill = require('./settings-bill');
 
 
@@ -31,7 +34,8 @@ app.use(bodyParser.json())
 app.get('/', function(req , res){
     res.render('index', {
         setting: settingsBill.getSettings(),
-        totals: settingsBill.totals()
+        totals: settingsBill.totals(),
+        color: settingsBill.totalClassName()
     })
 });
 //myRoute
@@ -61,7 +65,7 @@ app.get('/actions', function(req, res){
 
 app.get('/actions/:actionType', function(req, res){
     const actionType = req.params.actionType;
-    res.render("actions", {actions: settingsBill.actionsFor(actionType)})
+    res.render("actions",{actions: settingsBill.actionsFor(actionType)})
 
 });
 
