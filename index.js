@@ -52,6 +52,7 @@ app.post('/settings', function(req, res){
 });
 
 app.post('/action', function(req, res){
+    // console.log(req.body.actionType, 'is the action type');
 
     settingsBill.recordAction(req.body.actionType);
     res.redirect("/")
