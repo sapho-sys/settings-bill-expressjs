@@ -7,6 +7,11 @@ describe('settings-bill', function(){
     const settingsBill = SettingsBill();
 
     it('should be able to record calls', function(){
+        settingsBill.setSettings({
+            smsCost:1,
+            callCost:1,
+            warningLevel:5,
+            criticalLevel:10})
         settingsBill.recordAction('call');
         assert.equal(1, settingsBill.actionsFor('call').length);
     });

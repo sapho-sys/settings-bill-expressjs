@@ -30,9 +30,6 @@ module.exports = function SettingsBill() {
 
     function recordAction(action) {
 
-        // let grandTotal = grandTotal();
-        // console.log(getTotal);
-
         let cost = 0;
         if (action === 'sms'){
             cost = smsCost;
