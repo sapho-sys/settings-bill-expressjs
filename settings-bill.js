@@ -43,7 +43,7 @@ module.exports = function SettingsBill() {
                 actionList.push({
                     type: action,
                     cost,
-                    timestamp: moment(new Date()).fromNow()
+                    timestamp: new Date()
                 });
             }
 
@@ -87,12 +87,7 @@ module.exports = function SettingsBill() {
         }
         return total;
 
-        // the short way using reduce and arrow functions
-
-        // return actionList.reduce((total, action) => { 
-        //     let val = action.type === type ? action.cost : 0;
-        //     return total + val;
-        // }, 0);
+        
     }
 
     function grandTotal() {
@@ -100,12 +95,12 @@ module.exports = function SettingsBill() {
     }
 
     function totals() {
-        let smsTotal = getTotal('sms')
-        let callTotal = getTotal('call')
+        let smsTotal = getTotal('sms').toFixed(2)
+        let callTotal = getTotal('call').toFixed(2)
         return {
             smsTotal,
             callTotal,
-            grandTotal : grandTotal()
+            grandTotal : grandTotal().toFixed(2)
         }
     }
 

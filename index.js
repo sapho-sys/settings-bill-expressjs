@@ -4,6 +4,7 @@ const express = require('express');
 const exphbs  = require('express-handlebars');
 //import body-parser
 const bodyParser = require('body-parser');
+const moment = require('moment');
 
 
 
@@ -60,13 +61,45 @@ app.post('/action', function(req, res){
 });
 
 app.get('/actions', function(req, res){
-    res.render("actions", {actions: settingsBill.actions()})
+    
+    let strMoment = settingsBill.actions();
+    
+    let updatedMoment = [];
+    
+    for (let i = 0; i < strMoment.length; i++) {
+        updatedMoment.push({
+            type: strMoment[i].type,
+            cost: strMoment[i].cost,
+            timestamp : (moment(strMoment[i].timestamp, 'YYYY-MM-DD hh:mm:ss a').fromNow())
+
+        }); 
+    };
+
+    res.render('actions', {
+        actions: updatedMoment
+    });
+
 
 });
 
 app.get('/actions/:actionType', function(req, res){
     const actionType = req.params.actionType;
-    res.render("actions",{actions: settingsBill.actionsFor(actionType)})
+    let strMomentType = settingsBill.actionsFor(actionType);
+    let momentListType = [];
+    
+    for (let i = 0; i < strMomentType.length; i++) {
+        momentListType.push({
+            type: strMomentType[i].type,
+            cost: strMomentType[i].cost,
+            timestamp : (moment(strMomentType[i].timestamp, 'YYYY-MM-DD hh:mm:ss a').fromNow())
+
+        }); 
+    };
+
+    res.render('actions', {
+        actions: momentListType
+    });
+
 
 });
 
